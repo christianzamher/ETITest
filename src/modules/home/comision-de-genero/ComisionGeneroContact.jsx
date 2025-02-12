@@ -41,7 +41,7 @@ function ComisionGeneroContact() {
                 rel="noreferrer"
                 sx={{ wordBreak: 'break-word' }}
               >
-                Link
+                <p>Link</p>
               </Link>
             </Typography>
           </Box>
