@@ -1,0 +1,22 @@
+{
+  "title": "Listado de Inscripciones",
+  "attendanceTitle": "Control de Asistencia",
+  "status": "Estado de la inscripción",
+  "export": "Descargar para Excel",
+  "exportFilename": "inscripciones-{{date}}.csv",
+  "waitlist": "Lista de Espera",
+  "payment-pending": "Pendiente de Pago",
+  "payment-to-confirm": "Procesando Pago",
+  "flagged": "Comprobante Rechazado",
+  "payment-delayed": "Pago Demorado",
+  "confirmed": "Confirmada",
+  "cancelled": "Cancelada",
+  "changeStatus": "Guardar",
+  "processSignups": "Procesar Inscripciones",
+  "alert": {
+    "title": "Confirmación",
+    "confirm": "Aceptar",
+    "description": "¿Deseas confirmar la asistencia de {{fullName}}?",
+    "cancel": "Cancelar"
+  }
+}

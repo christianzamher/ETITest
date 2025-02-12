@@ -1,0 +1,13 @@
+{
+  "history": "Historia del ETI",
+  "manifest": "Manifiesto ETIano",
+  "signup": "Inscripción",
+  "signupList": "Listado de inscripciones",
+  "logout": "Cerrar Sesión",
+  "signin": "Crear usuario / Ingresar",
+  "gender": "Comisión de Género",
+  "genderWho": "Sobre Nosotres",
+  "genderProtocol": "Protocolo de Genero",
+  "genderContact": "Contacto",
+  "controlPanel": "Tu panel de control ETIano"
+}
