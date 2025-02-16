@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Signup, SignupStatus } from 'shared/signup';
-import { Button, Checkbox, Paper, useMediaQuery, useTheme } from '@mui/material';
+import { Button, Checkbox, Paper, useMediaQuery, useTheme, Box } from '@mui/material';
 import {
   DataGrid,
   GridColDef,
@@ -145,10 +145,14 @@ export function SignupListTable(props: {
   const { t } = useTranslation([SCOPES.COMMON.FORM, SCOPES.MODULES.SIGN_UP_LIST], {
     useSuspense: false
   });
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   const columns: GridColDef[] = getFields().map((fieldName) => ({
     field: fieldName,
     headerName: t(fieldName),
-    width: fieldName === 'email' ? 300 : 150
+    width: isSmallScreen ? 100 : fieldName === 'email' ? 300 : 150,
+    hide: isSmallScreen && !['nameFirst', 'nameLast', 'status'].includes(fieldName)
   }));
 
   const sentEmailButton = {
@@ -278,8 +282,6 @@ export function SignupListTable(props: {
 
   const getFullName = (user: Signup | null) => (user ? `${user.nameFirst} ${user.nameLast}` : '');
 
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <>
       <Alert
@@ -310,47 +312,27 @@ export function SignupListTable(props: {
         overflow: 'auto'
       }}>
         <SearchBar setQuery={filterRows} fields={getFilterFields()} />
-        <DataGrid
-            rows={signups.map(getSignupValues)}
-            columns={columns}
-            checkboxSelection={isAdmin && !isAttendance}
-            onSelectionModelChange={selectionChanged}
-            loading={isLoading}
-            filterModel={{ items: filteredRows }}
-            autoHeight={isSmallScreen}
-            sx={{
-              '& .MuiDataGrid-root': {
-                border: 'none',
-              },
-              '& .MuiDataGrid-cell': {
-                whiteSpace: 'normal',
-                wordWrap: 'break-word',
-              },
-            }}
-        />
+        <Box sx={{ width: '100%', overflowX: 'auto' }}>
+          <DataGrid
+              rows={signups.map(getSignupValues)}
+              columns={columns}
+              checkboxSelection={isAdmin && !isAttendance}
+              onSelectionModelChange={selectionChanged}
+              loading={isLoading}
+              filterModel={{ items: filteredRows }}
+              autoHeight={isSmallScreen}
+              sx={{
+                '& .MuiDataGrid-root': {
+                  border: 'none',
+                },
+                '& .MuiDataGrid-cell': {
+                  whiteSpace: 'normal',
+                  wordWrap: 'break-word',
+                },
+              }}
+          />
+        </Box>
       </Paper>
     </>
   );
 }
-
-// function getBackgroundColor(status?: SignupStatus) {
-//   const colorYellow = 'rgba(255,242,0,0.5)';
-//   const colorOrange = 'rgba(255,124,0,0.5)';
-//   const colorRed = 'rgba(255,0,20,0.4)';
-//   const colorBeige = '#ffe4c4';
-//   const colorGreen = 'rgba(85,204,0,0.5)';
-//   switch (status) {
-//     case SignupStatus.CONFIRMED:
-//       return colorGreen;
-//     case SignupStatus.WAITLIST: // lista de espera
-//       return colorBeige;
-//     case SignupStatus.PAYMENT_PENDING: // Pendiente de Aprobación
-//       return colorYellow;
-//     case SignupStatus.CANCELLED: // Cancelado
-//       return colorRed;
-//     case SignupStatus.PAYMENT_DELAYED: //Pago demorado
-//       return colorOrange;
-//     default:
-//       return 'white';
-//   }
-// }
