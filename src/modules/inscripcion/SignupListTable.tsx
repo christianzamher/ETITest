@@ -309,29 +309,38 @@ export function SignupListTable(props: {
         height: '100vh',
         marginTop: 3,
         padding: isSmallScreen ? '8px' : '16px',
-        overflow: 'auto'
+        overflow: 'auto',
+        
       }}>
         <SearchBar setQuery={filterRows} fields={getFilterFields()} />
         <Box sx={{ width: '100%', overflowX: 'auto' }}>
-          <DataGrid
-              rows={signups.map(getSignupValues)}
-              columns={columns}
-              checkboxSelection={isAdmin && !isAttendance}
-              onSelectionModelChange={selectionChanged}
-              loading={isLoading}
-              filterModel={{ items: filteredRows }}
-              autoHeight={isSmallScreen}
-              sx={{
-                '& .MuiDataGrid-root': {
-                  border: 'none',
-                },
-                '& .MuiDataGrid-cell': {
-                  whiteSpace: 'normal',
-                  wordWrap: 'break-word',
-                },
-              }}
-          />
-        </Box>
+  <DataGrid
+    rows={signups.map(getSignupValues)}
+    columns={columns}
+    checkboxSelection={isAdmin && !isAttendance}
+    onSelectionModelChange={selectionChanged}
+    loading={isLoading}
+    filterModel={{ items: filteredRows }}
+    autoHeight
+    sx={{
+      '& .MuiDataGrid-root': {
+        border: 'none',
+      },
+      '& .MuiDataGrid-cell': {
+        whiteSpace: 'normal',
+        wordWrap: 'break-word',
+        fontSize: isSmallScreen ? '0.75rem' : '1rem',
+      },
+      '& .MuiDataGrid-columnHeaders': {
+        backgroundColor: theme.palette.background.paper,
+      },
+      '& .MuiDataGrid-columnHeaderTitle': {
+        fontWeight: 'bold',
+        fontSize: isSmallScreen ? '0.75rem' : '1rem',
+      },
+    }}
+  />
+</Box>
       </Paper>
     </>
   );

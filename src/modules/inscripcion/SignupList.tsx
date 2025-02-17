@@ -63,7 +63,7 @@ const SignupList = (props: { isAttendance: boolean }) => {
   return (
     <>
       <WithAuthentication />
-      <Container maxWidth="xl" sx={{ marginTop: 3 }}>
+      <Container  disableGutters sx={{ marginTop: 3 , paddingLeft: 0 , paddingRight: 0 }}>
         <Grid container direction="column" spacing={3}>
           {!props.isAttendance ? (
             <Grid item>
@@ -94,6 +94,8 @@ const SignupList = (props: { isAttendance: boolean }) => {
                 width: '100%',
                 overflowX: 'auto',
                 padding: isSmallScreen ? '8px' : '16px',
+                paddingLeft: 0, // Eliminar padding izquierdo
+                paddingRight: 0 
               }}
             >
               <SignupListTable
